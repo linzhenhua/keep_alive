@@ -1,8 +1,8 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stddef.h>
+#include <sys/epoll.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
@@ -11,9 +11,8 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <time.h>
-#include <errno.h>
 #include <signal.h>
-#include <sys/epoll.h>
+#include <errno.h>
 
 #include "cJSON.h"
 #include "ytk_daemon_log.h"
@@ -518,7 +517,7 @@ int SetNonBlocking(int fd)
  * */
 void AddFd(int epollfd, int fd, int enableEt)
 {
-    epoll_event event;
+    struct epoll_event event;
     event.data.fd = fd;
     event.events =  EPOLLIN;
 
@@ -655,7 +654,7 @@ void KeepAlive()
     /*联合电子发送过来的数据保存到这里*/
     char pszEServeRecvBuf[BUFFER_SIZE];
 
-    epoll_event events[MAX_EVENT_NUMBER];
+    struct epoll_event events[MAX_EVENT_NUMBER];
 
     int epollfd = epoll_create(5);
     if(-1 != epollfd)

@@ -7,7 +7,7 @@ TARGET=main           #目标可执行文件
 
 #compile and lib parameter
 CXX=gcc       					#编译器
-CXXFLAGS=-g -Wall -std=c99   #编译器参数
+CXXFLAGS=-g -Wall -std=gnu99   #编译器参数
 LIBS=-lm              #动态链接库名称
 #LDFLAGS=-L/usr/lib/mysql/       #动态库路径
 #INCLUDE=-I/usr/include/mysql/   #头文件路径
